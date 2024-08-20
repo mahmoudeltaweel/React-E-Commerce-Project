@@ -1,0 +1,13 @@
+.btn{
+    background-color: white;
+    outline: none;
+    border: 0;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.btn-primary{
+    background-color: green;
+    color: white;
+    font-size: 15px;
+}
