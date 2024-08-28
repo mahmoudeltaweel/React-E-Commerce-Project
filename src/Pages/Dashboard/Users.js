@@ -12,18 +12,20 @@ export default function Users(){
   const[users , setusers]=useState([]);
   const[deleteuser , setDeleteUser]=useState(false);
   const[currentUser , setCurrentUser]=useState("");
-  
+
+  const userFilter=users.filter((user)=>user.id !== currentUser.id)
+  useEffect(()=>{
+    Axios.get(`/${USER}`)
+      .then((res)=>setCurrentUser(res.data))
+      .catch((err)=>console.log(err)
+      )
+  },[])
     useEffect(()=>{
       Axios.get(`/${USERS}`)
         .then((data)=>setusers(data.data))
         .catch((err)=>console.log(err))
     },[deleteuser])
-    useEffect(()=>{
-      Axios.get(`/${USER}`)
-        .then((res)=>setCurrentUser(res.data))
-        .catch((err)=>console.log(err)
-        )
-    },[])
+  
     const cookie = Cookie()
     const token =cookie.get("Bearer")
     async function handeldelete(id){
@@ -38,12 +40,12 @@ export default function Users(){
           console.log(err);
         }
     }
-    const userFilter=users.filter((user)=>user.id !== currentUser.id)
     const userInfo = userFilter.map((item , index)=>
       <tr key={index}>
       <td>{index+1}</td>
       <td>{item.name}</td>
       <td>{item.email}</td>
+      <td>{item.role==='1995'?'admin' :item.role==='2001'? "User" : "writer" }</td>
       <td>
         <div  className="d-flex gap-2 alin-items-center">
           <Link to={`${item.id}`} >
@@ -58,7 +60,12 @@ export default function Users(){
     )
     return(
       <div className="bg-white p-2 w-100"> 
+      <div className="d-flex align-items-center justify-content-between"> 
       <h1>Users Page</h1>
+      <Link to="/dashboard/user/add" className="btn btn-primary">
+        Add User
+      </Link>
+      </div>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -66,12 +73,10 @@ export default function Users(){
             <th>Name</th>
             <th>Email</th>
             <th>action</th>
+            <th>role</th>
           </tr>
         </thead>
-          <tbody>
-              {userInfo}
-           </tbody>
-        
+        <tbody> {userInfo} </tbody>
       </Table>
       </div>
     );

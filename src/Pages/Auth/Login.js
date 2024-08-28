@@ -32,7 +32,7 @@ export default function Login() {
       setLoading(false);
       const token = res.data.token;
       cooki.set("Bearer", token);
-      navigate("/dashboard/users");
+      navigate("/");
     } catch (err) {
       setLoading(false);
       if (err.response.status === 401) {

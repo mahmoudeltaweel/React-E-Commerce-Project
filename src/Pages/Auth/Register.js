@@ -30,12 +30,10 @@ export default function Register() {
     e.preventDefault();
     setLoading(true);    
     try{
-      console.log(form);
-
      const res =  await axios.post(`${baseURL}/${REGISTER}`,form);
-     
        setLoading(false);
        const token = res.data.token;
+       debugger
        cooki.set("Bearer" , token);
        navigate("/dashboard/users");
        

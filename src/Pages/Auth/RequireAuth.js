@@ -9,9 +9,11 @@ export default function RequireAuth(){
     const navigate=useNavigate();
     const [user , setuser]=useState("");
     useEffect(()=>{
-        Axios.get(`/${USER}`).then((data)=>setuser(data.data))
+        Axios.get(`/${USER}`)
+        .then((data)=>setuser(data.data))
         .catch(()=>navigate("/login"))
     },[])
+    
     const cookie=Cookie();
     const token = cookie.get("Bearer")
     return token ? (user ===""? (<Loading />):(<Outlet />) ):<Navigate to={"/Login"} />

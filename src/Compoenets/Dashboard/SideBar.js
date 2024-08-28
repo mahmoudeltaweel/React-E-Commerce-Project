@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./bars.css";
-import { faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faUserPlus, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { Menu } from "../../Context/MenuContext";
@@ -34,6 +34,19 @@ export default function SideBar() {
         />
         <p className="m-0" style={{ display: isopen ? "block" : "none" }}>
           Users
+        </p>
+      </NavLink>
+      <NavLink
+        to={"/dashboard/user/add"}
+        className="d-flex align-items-center gap-2 side-bar-link"
+      >
+        <FontAwesomeIcon
+          style={{ padding: isopen ? "10px 8px 10px 15px" : "10px 13px" }}
+          className="iconuser"
+          icon={faUserPlus}
+        />
+        <p className="m-0" style={{ display: isopen ? "block" : "none" }}>
+          Add User
         </p>
       </NavLink>
     </div>
